@@ -24,37 +24,13 @@ button{font:inherit;color:inherit;cursor:pointer}
 .plate img,.plate video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block;background:#0b0604}
 .plate .lq{filter:blur(12px);transform:scale(1.06)}
 /* FX layers */
-#fx-vig{position:absolute;inset:0;z-index:41;pointer-events:none;background:radial-gradient(ellipse at 50% 48%,transparent 50%,rgba(0,0,0,.5) 100%)}
-#fx-grade{position:absolute;inset:0;z-index:39;pointer-events:none;mix-blend-mode:soft-light;opacity:.32;transition:opacity 1.5s;background:linear-gradient(180deg,#ffb86b 0%,#ff9a3c 50%,#3b1a05 100%)}
-  radial-gradient(circle at 14% 8%,rgba(255,250,230,.6),rgba(255,230,180,.2) 10%,transparent 24%),
-  radial-gradient(circle at 32% 26%,rgba(255,220,160,.18),transparent 8%)}
-body.outdoor body.outdoor #fx-grade{opacity:.12}
+#fx-vig{position:absolute;inset:0;z-index:41;pointer-events:none;background:radial-gradient(ellipse at 50% 48%,transparent 55%,rgba(0,0,0,.45) 100%)}
 /* ---------- top bar ---------- */
 #bar{position:absolute;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:calc(10px + env(safe-area-inset-top)) 14px 0}
 #bar .brand{font-family:var(--serif);font-size:15px;letter-spacing:.5px;color:var(--ink-dim);text-shadow:0 1px 4px #000}
 #snd{display:flex;align-items:center;gap:7px;height:38px;padding:0 12px;border-radius:999px;border:1px solid rgba(216,169,63,.55);background:rgba(20,10,5,.55);backdrop-filter:blur(6px);color:var(--ink);font-size:12.5px;font-weight:500}
 #snd svg{width:18px;height:18px}
 
-.door{position:absolute;top:0;bottom:0;width:50%;transform-style:preserve-3d;transition:transform 2.4s cubic-bezier(.6,.05,.3,1);
-  background:
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='w'><feTurbulence type='fractalNoise' baseFrequency='.012 .35' numOctaves='3' seed='2'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 .55 .55 0 -.75'/></filter><rect width='200' height='200' filter='url(%23w)'/></svg>") ,
-    linear-gradient(90deg,#4a2a16,#6b3d1f 40%,#5a3219 70%,#3e2311);
-  box-shadow:inset 0 0 0 3px #2a160a,inset 0 0 40px rgba(0,0,0,.6)}
-.door.l{left:0;transform-origin:left center;border-right:3px solid #c9a24a}
-.door.r{right:0;transform-origin:right center;border-left:3px solid #c9a24a}
-.door .panel{position:absolute;left:12%;right:12%;border:3px solid #2a160a;border-radius:4px;
-  background:linear-gradient(135deg,#7a4523,#5b321a 60%,#6b3d1f);
-  box-shadow:inset 0 2px 0 rgba(255,220,160,.18),inset 0 -3px 6px rgba(0,0,0,.5),0 2px 6px rgba(0,0,0,.4)}
-.door .panel.a{top:5%;height:22%;border-radius:40% 40% 4px 4px/60% 60% 4px 4px}
-.door .panel.b{top:31%;height:30%}
-.door .panel.c{top:65%;height:28%}
-.door .panel::before{content:"";position:absolute;inset:10%;background:radial-gradient(circle,#e8c46a 0 2.2px,#8a5a12 2.8px,transparent 3.6px) 0 0/22px 22px}
-.door .boss{position:absolute;width:24px;height:24px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffe9a8,#c9962a 45%,#6e4a0c 80%);box-shadow:0 2px 4px rgba(0,0,0,.6)}
-.door .ring{position:absolute;top:48%;width:34px;height:34px;border-radius:50%;border:5px solid #d6ad4d;box-shadow:0 2px 3px rgba(0,0,0,.6),inset 0 0 0 1px #6e4a0c}
-.door.l .ring{right:8%}.door.r .ring{left:8%}
-.door.l .boss{right:calc(8% + 7px);top:calc(48% - 26px)}.door.r .boss{left:calc(8% + 7px);top:calc(48% - 26px)}
-.door .band{position:absolute;left:0;right:0;height:9px;background:linear-gradient(#e2bd63,#8a5a12);box-shadow:0 1px 3px rgba(0,0,0,.6)}
-.door .band.t{top:28%}.door .band.m{top:62%}
 .hint{position:absolute;left:50%;bottom:14%;transform:translateX(-50%);z-index:20;display:flex;flex-direction:column;align-items:center;gap:10px;padding:14px 22px;border-radius:18px;background:rgba(20,10,5,.72);backdrop-filter:blur(8px);border:1px solid rgba(216,169,63,.5);text-align:center;transition:opacity .5s;width:min(86%,330px)}
 .hint h2{margin:0;font-family:var(--serif);font-weight:600;font-size:21px;color:var(--ink)}
 .hint p{margin:0;font-size:12.5px;color:var(--ink-dim)}
@@ -63,7 +39,6 @@ body.outdoor body.outdoor #fx-grade{opacity:.12}
 .cap{position:absolute;left:0;right:0;bottom:12%;text-align:center;padding:0 24px;z-index:5}
 .cap .k{font-family:var(--serif);font-size:24px;font-weight:600;text-shadow:0 2px 10px #000}
 .cap .s{font-size:12.5px;color:var(--ink-dim);margin-top:6px;text-shadow:0 1px 6px #000}
-.tapnext{position:absolute;left:50%;bottom:4%;transform:translateX(-50%);font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(246,233,207,.75);z-index:5;text-shadow:0 1px 4px #000}
 
 /* sanctum overlay scene (text + CTA) */
 #sanctum,#offer,#thali,#ritual,#done{background:transparent}
@@ -96,13 +71,6 @@ body.outdoor body.outdoor #fx-grade{opacity:.12}
 
 /* ---------- 5. thali ---------- */
 #thali .sheet{padding-top:14px}
-.thali-wrap{display:flex;justify-content:center;margin:4px 0 6px}
-.thali-wrap svg{width:min(100%,300px);height:auto;display:block}
-.laddu{cursor:pointer;transition:transform .2s}
-.laddu .halo{opacity:0;transition:opacity .2s;pointer-events:none}
-.laddu.on .halo{opacity:1}
-.laddu.on .tick{opacity:1}
-.laddu .tick{opacity:0;transition:opacity .2s}
 .count{text-align:center;font-family:var(--serif);font-size:20px;font-weight:600;min-height:28px}
 .count b{color:#ffd77a;font-size:26px}
 .fields{display:grid;gap:9px;margin-top:10px}
@@ -121,7 +89,7 @@ body.outdoor body.outdoor #fx-grade{opacity:.12}
 
 /* ---------- 7. done ---------- */
 #done .sheet{text-align:center}
-.seal{width:64px;height:64px;margin:-50px auto 8px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffe9a8,#c9962a 45%,#6e4a0c 85%);display:grid;place-items:center;box-shadow:0 8px 20px rgba(0,0,0,.6);font-size:30px;color:#4a0f0f}
+.seal{width:56px;height:56px;margin:0 auto 10px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffe9a8,#c9962a 45%,#6e4a0c 85%);display:grid;place-items:center;box-shadow:0 8px 20px rgba(0,0,0,.6);font-size:30px;color:#4a0f0f}
 .sum{margin:12px 0 0;display:grid;gap:6px;text-align:left;font-size:13.5px;color:var(--ink-dim);border-top:1px solid rgba(216,169,63,.25);padding-top:12px}
 .sum b{color:var(--ink);font-weight:500}
 .sum .line{display:flex;justify-content:space-between;gap:12px}
@@ -168,28 +136,15 @@ body.outdoor body.outdoor #fx-grade{opacity:.12}
 .numrow input:focus{border-color:var(--gold);background:rgba(255,255,255,.09)}
 .stepb{width:48px;height:48px;border-radius:50%;border:1px solid rgba(216,169,63,.5);background:rgba(255,255,255,.05);font-size:26px;line-height:1;display:grid;place-items:center}
 .stepb:active{transform:scale(.95)}
-.ritual-plate,.aarti-plate{opacity:0;transition:opacity 1.2s ease;z-index:6;pointer-events:none}
+.ritual-plate,.aarti-plate{opacity:0;transition:opacity .6s ease;z-index:6;pointer-events:none}
 #garbha .plate{pointer-events:none}
 #garbha.flowers #flowerPlate,#garbha.sun #sunPlate{opacity:1}
 /* ---------- 1. gate ---------- */
 #gate{background:#9fb3c4;z-index:12}
 #gate:not(.on){z-index:0;pointer-events:none}
 #gate.open .hint{transition:opacity .4s;opacity:0;pointer-events:none}
-#gate .zoom{position:absolute;inset:0;transform-origin:var(--ox,50%) var(--oy,46%);transition:transform 2.8s cubic-bezier(.5,0,.6,1) 1.1s,opacity 1.2s ease 2.5s}
-#gate.open .zoom{transform:scale(2.6);opacity:0}
-#doorway{position:absolute;z-index:3;perspective:1100px;overflow:hidden;background:#0b0604;box-shadow:inset 0 0 40px rgba(0,0,0,.8)}
-#inner{position:absolute;inset:0;background:#0b0604 url(img/court.jpg) 50% 40%/cover no-repeat;filter:brightness(.85)}
-#people img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block}
-#gate.open .door.l{transform:rotateY(-108deg)}
-#gate.open .door.r{transform:rotateY(108deg)}
-#gate.open #gate.open .hint{transition:opacity .4s;opacity:0;pointer-events:none}
 .gate-sign{position:absolute;left:0;right:0;top:calc(58px + env(safe-area-inset-top));text-align:center;z-index:6;pointer-events:none}
 .gate-sign .k{font-family:var(--serif);font-size:15px;letter-spacing:.5px;color:#fff;text-shadow:0 1px 6px #000,0 0 18px rgba(0,0,0,.8)}
-/* ---------- 2. courtyard / mandapa ---------- */
-#court .plate img.hi{transform-origin:48% 62%}
-
-#mandapa .plate img.hi{transform-origin:50% 47%}
-
 /* ---------- 3. garbhagriha (persistent) ---------- */
 #garbha{position:absolute;inset:0;z-index:1;opacity:0;visibility:hidden;transition:opacity 1.5s ease,visibility 0s linear 1.5s,filter .8s}
 #sanctum,#offer,#thali,#ritual,#done{z-index:8}
@@ -197,24 +152,47 @@ body.outdoor body.outdoor #fx-grade{opacity:.12}
 #garbha.on{opacity:1;visibility:visible;transition:opacity 1.5s ease,visibility 0s,filter .8s}
 #garbha.dim{filter:brightness(.5) saturate(.9)}
 
-.aarti-plate{position:absolute;inset:0;opacity:0;transition:opacity 1.6s ease;z-index:6}
+.aarti-plate{position:absolute;inset:0;opacity:0;transition:opacity .6s ease;z-index:6}
 #garbha.aarti .aarti-plate{opacity:1}
 
-#ritual.no .ritual-cap{position:absolute;left:0;right:0;bottom:7%;text-align:center;padding:0 24px;z-index:9}
 .ritual-cap .k{font-family:var(--serif);font-size:24px;font-weight:600;text-shadow:0 2px 10px #000}
 .ritual-cap .s{font-size:13px;color:var(--ink-dim);margin-top:6px;text-shadow:0 1px 6px #000}
 #sanctum,#offer,#thali,#ritual,#done{background:transparent}
 @media (min-width:600px){#stage{height:min(100%,960px)}}
 
+/* ---------- fit: sheets never overflow the frame ---------- */
+.panel-wrap{overflow:hidden}
+.sheet{max-height:calc(100% - 58px - env(safe-area-inset-top));overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.sheet::-webkit-scrollbar{width:0;height:0}
+.sanct-text{padding-bottom:env(safe-area-inset-bottom)}
+@media (max-height:720px){
+  .sheet{padding:14px 14px 12px}.sheet h2{font-size:21px}.sheet .sub{margin:4px 0 10px;font-size:12.5px}
+  .opt{padding:10px 12px;gap:10px;grid-template-columns:44px 1fr auto}.opt .ic{width:44px;height:44px}.opt .ic svg{width:26px;height:26px}.opt .t{font-size:18px}
+  .numrow input{height:54px;font-size:34px}.stepb{width:42px;height:42px}
+  .fields{gap:7px}.fields input,.fields textarea{height:42px;font-size:14px}.fields textarea{height:56px}
+  .cta{height:44px}.row{margin-top:10px}.count{min-height:24px;font-size:18px}
+  .cap .k,.ritual-cap .k{font-size:21px}.sanct-text .kn{font-size:18px}.sanct-text .en{font-size:17px}
+  .hint{bottom:10%;padding:12px 18px}.hint h2{font-size:19px}
+  .seal{width:46px;height:46px;margin:0 auto 6px;font-size:22px}
+}
+@media (max-height:600px){
+  .sheet h2{font-size:19px}.sheet .sub{display:none}.fields label{display:none}.fields{margin-top:6px}
+  .count{min-height:20px;font-size:16px}.numrow input{height:46px;font-size:28px}.msgquote{display:none}
+}
+@media (max-width:360px){
+  .gate-sign .k{font-size:13px}#bar .brand{font-size:13.5px}
+  .opt .t{font-size:17px}.opt .d{font-size:11.5px}.tag{padding:5px 8px;font-size:10px}
+  .walkcap{padding-right:110px}.walkcap .k{font-size:17px}
+}
 </style>
 </head>
 <body>
 <div id="stage">
   <div id="bar">
     <div class="brand">Sashtipoorti · 18 Nov 2026</div>
-    <button id="snd" aria-pressed="true" aria-label="Sound on">
+    <button id="snd" aria-pressed="false" aria-label="Sound off">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 9a4 4 0 0 1 0 6"/><path class="w2" d="M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg>
-      <span>Sound on</span>
+      <span>Sound off</span>
     </button>
   </div>
   <div id="cam">
@@ -347,7 +325,6 @@ body.outdoor body.outdoor #fx-grade{opacity:.12}
   </section>
 
   </div><!-- /cam -->
-  <div id="fx-grade"></div>
   <div id="fx-vig"></div>
 </div>
 
@@ -379,40 +356,47 @@ function show(id){ scenes.forEach(s=>s.classList.toggle('on',s.id===id)); curren
   document.body.classList.toggle('outdoor',OUTDOOR.has(id)); $('#cam').classList.toggle('walking',WALK.has(id));
   AMB.scene(id); }
 
-/* ---------- sound engine (synthesised; no files) ---------- */
-const SND={ctx:null,on:true,master:null,drone:null,chantTimer:null,ghantiTimer:null};
-try{ SND.on = localStorage.getItem('rsvp_sound')!=='off'; }catch(e){}
-function ac(){ if(!SND.ctx){ const C=window.AudioContext||window.webkitAudioContext; if(!C) return null; SND.ctx=new C(); SND.master=SND.ctx.createGain(); SND.master.gain.value=SND.on?1:0; SND.master.connect(SND.ctx.destination);} if(SND.ctx.state==='suspended') SND.ctx.resume(); return SND.ctx; }
-function setSound(on){ SND.on=on; try{localStorage.setItem('rsvp_sound',on?'on':'off')}catch(e){} if(SND.master) SND.master.gain.setTargetAtTime(on?1:0,SND.ctx.currentTime,.05); const b=$('#snd'); b.setAttribute('aria-pressed',on); b.querySelector('span').textContent=on?'Sound on':'Muted'; b.querySelector('.w1').style.opacity=on?1:.25; b.querySelector('.w2').style.opacity=on?1:.25; }
-$('#snd').addEventListener('click',()=>{ ac(); setSound(!SND.on); if(SND.on) bell(.5); });
+/* ---------- sound engine: real recordings, Web Audio, OFF by default ---------- */
+const AUD={outdoor:'aud/outdoor.mp3',sanctum:'aud/sanctum.mp3',bell:'aud/bell.mp3',conch:'aud/conch.mp3',aarti:'aud/aarti.mp3',steps:'aud/footsteps.mp3'};
+const SND={ctx:null,on:false,master:null,raw:{},bufs:{},loops:{},silent:null};
+try{ SND.on = localStorage.getItem('rsvp_sound')==='on'; }catch(e){}
+// fetch the recordings early (no gesture needed); decode once an AudioContext exists
+Object.entries(AUD).forEach(([k,u])=>{ fetch(u).then(r=>r.arrayBuffer()).then(ab=>{ SND.raw[k]=ab; if(SND.ctx) decode(k); }).catch(()=>{}); });
+function decode(k){ if(!SND.ctx||SND.bufs[k]||!SND.raw[k]) return; const ab=SND.raw[k].slice(0); const p=SND.ctx.decodeAudioData(ab,b=>{ SND.bufs[k]=b; },()=>{}); if(p&&p.then) p.then(b=>{ SND.bufs[k]=b; }).catch(()=>{}); }
+function ac(){ try{
+  if(!SND.ctx){ const C=window.AudioContext||window.webkitAudioContext; if(!C) return null; SND.ctx=new C(); SND.master=SND.ctx.createGain(); SND.master.gain.value=SND.on?1:0; SND.master.connect(SND.ctx.destination); Object.keys(AUD).forEach(decode); }
+  if(SND.ctx.state==='suspended') SND.ctx.resume().catch(()=>{});
+  // iOS: a (silent) media element started from a gesture moves audio to the playback session, so sound plays even with the ring/silent switch on
+  if(!SND.silent){ const a=new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAA='); a.loop=true; a.volume=0.01; a.setAttribute('playsinline',''); const p=a.play(); if(p&&p.catch) p.catch(()=>{}); SND.silent=a; }
+  return SND.ctx; }catch(e){ return null; } }
+function sfx(k,vol=1,at=0){ if(!SND.on) return; const c=ac(); if(!c||!SND.bufs[k]) return; const s=c.createBufferSource(); s.buffer=SND.bufs[k]; const g=c.createGain(); g.gain.value=vol; s.connect(g); g.connect(SND.master); s.start(c.currentTime+at); }
+function loopStart(k,vol=1,fade=1.5){ if(!SND.on) return; const c=ac(); if(!c||!SND.bufs[k]||SND.loops[k]) return; const s=c.createBufferSource(); s.buffer=SND.bufs[k]; s.loop=true; const g=c.createGain(); g.gain.setValueAtTime(0,c.currentTime); g.gain.linearRampToValueAtTime(vol,c.currentTime+fade); s.connect(g); g.connect(SND.master); s.start(); SND.loops[k]={s,g}; }
+function loopStop(k,fade=1.2){ const L=SND.loops[k]; if(!L) return; delete SND.loops[k]; const c=SND.ctx; try{ L.g.gain.setTargetAtTime(0,c.currentTime,fade/3); L.s.stop(c.currentTime+fade+.1); }catch(e){} }
+function loopLevel(k,vol,t=1.2){ const L=SND.loops[k]; if(L) L.g.gain.setTargetAtTime(vol,SND.ctx.currentTime,t/3); }
+function setSound(on){ SND.on=on; try{localStorage.setItem('rsvp_sound',on?'on':'off')}catch(e){}
+  const b=$('#snd'); b.setAttribute('aria-pressed',on); b.setAttribute('aria-label',on?'Sound on':'Sound off'); b.querySelector('span').textContent=on?'Sound on':'Sound off'; b.querySelector('.w1').style.opacity=on?1:.25; b.querySelector('.w2').style.opacity=on?1:.25;
+  if(on){ const c=ac(); if(c) SND.master.gain.setTargetAtTime(1,c.currentTime,.05); setTimeout(()=>{ AMB.scene(current); bell(.7); },150); }
+  else { if(SND.ctx) SND.master.gain.setTargetAtTime(0,SND.ctx.currentTime,.05); Object.keys(SND.loops).forEach(k=>loopStop(k,.3)); } }
+$('#snd').addEventListener('click',()=>{ setSound(!SND.on); });
 setSound(SND.on);
+// named cues used by the scenes (vol, and for compatibility the old signature bell(vol,f0,dur) is accepted)
+function bell(vol=1){ sfx('bell',Math.min(1,vol)); }
+function ghanti(){ sfx('aarti',.6); }
+function ping(){ sfx('bell',.18); }
+function shankha(){ sfx('conch',.9); }
+function ghantiStart(ms=6500){ if(!SND.on) return; loopStart('aarti',.8,.3); setTimeout(()=>loopStop('aarti',1.2),ms); }
+function droneStart(){ AMB.scene('sanctum'); }
+function droneStop(){ loopLevel('sanctum',.35,2); }
+function ringBells(){ [0,1].forEach(i=>setTimeout(()=>bell(.8),i*900)); }
 
-function bell(vol=1,f0=520,dur=5){ let c; try{ c=ac(); }catch(e){ return; } if(!c) return; const t=c.currentTime; const out=c.createGain(); out.gain.value=vol*.5; out.connect(SND.master);
-  [[1,1,dur],[2.0,.55,dur*.8],[2.76,.4,dur*.55],[4.07,.25,dur*.35],[5.4,.15,dur*.25],[6.8,.08,dur*.18]].forEach(([r,a,d])=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sine'; o.frequency.value=f0*r; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(a,t+.008); g.gain.exponentialRampToValueAtTime(.0005,t+d); o.connect(g); g.connect(out); o.start(t); o.stop(t+d+.1); });
-  const n=c.createBufferSource(), buf=c.createBuffer(1,c.sampleRate*.05,c.sampleRate), ch=buf.getChannelData(0); for(let i=0;i<ch.length;i++) ch[i]=(Math.random()*2-1)*(1-i/ch.length); n.buffer=buf; const ng=c.createGain(); ng.gain.value=.25*vol; const bp=c.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=f0*3; bp.Q.value=2; n.connect(bp); bp.connect(ng); ng.connect(out); n.start(t);
-}
-function ghanti(){ bell(.35,1480,1.1); }
-function ping(){ try{ bell(.25,1960,.9); }catch(e){} }
-function creak(){ const c=ac(); if(!c) return; const t=c.currentTime,len=2.2; const buf=c.createBuffer(1,c.sampleRate*len,c.sampleRate),ch=buf.getChannelData(0); for(let i=0;i<ch.length;i++) ch[i]=Math.random()*2-1; const n=c.createBufferSource(); n.buffer=buf; const f=c.createBiquadFilter(); f.type='bandpass'; f.Q.value=18; f.frequency.setValueAtTime(220,t); f.frequency.exponentialRampToValueAtTime(140,t+len); const g=c.createGain(); g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.18,t+.3); g.gain.linearRampToValueAtTime(.1,t+1.4); g.gain.linearRampToValueAtTime(0,t+len); n.connect(f); f.connect(g); g.connect(SND.master); n.start(t); n.stop(t+len); }
-function shankha(){ const c=ac(); if(!c) return; const t=c.currentTime; const o=c.createOscillator(),o2=c.createOscillator(),f=c.createBiquadFilter(),g=c.createGain(); o.type='sawtooth'; o2.type='sawtooth'; o.frequency.setValueAtTime(392,t); o2.frequency.setValueAtTime(394,t); o.frequency.linearRampToValueAtTime(440,t+1.2); o2.frequency.linearRampToValueAtTime(442,t+1.2); f.type='lowpass'; f.frequency.setValueAtTime(600,t); f.frequency.linearRampToValueAtTime(1400,t+1); f.frequency.linearRampToValueAtTime(500,t+3.2); f.Q.value=4; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.13,t+.9); g.gain.setValueAtTime(.13,t+2.4); g.gain.linearRampToValueAtTime(0,t+3.4); o.connect(f); o2.connect(f); f.connect(g); g.connect(SND.master); o.start(t); o2.start(t); o.stop(t+3.5); o2.stop(t+3.5); }
-function droneStart(){ const c=ac(); if(!c||SND.drone) return; const g=c.createGain(); g.gain.value=0; g.gain.linearRampToValueAtTime(.07,c.currentTime+3); const lp=c.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=900; lp.Q.value=.7; const lfo=c.createOscillator(),lg=c.createGain(); lfo.frequency.value=.12; lg.gain.value=180; lfo.connect(lg); lg.connect(lp.frequency); lfo.start();
-  const oscs=[[110,'sawtooth'],[110.6,'sawtooth'],[165,'triangle'],[220.4,'sine']].map(([f,ty])=>{ const o=c.createOscillator(); o.type=ty; o.frequency.value=f; o.connect(lp); o.start(); return o; }); lp.connect(g); g.connect(SND.master); SND.drone={g,oscs,lfo};
-  const om=()=>{ if(!SND.drone) return; const t=c.currentTime; const o=c.createOscillator(),f1=c.createBiquadFilter(),f2=c.createBiquadFilter(),gg=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(131,t); o.frequency.linearRampToValueAtTime(130,t+4); f1.type='bandpass'; f1.Q.value=6; f1.frequency.setValueAtTime(600,t); f1.frequency.linearRampToValueAtTime(300,t+2.5); f2.type='lowpass'; f2.frequency.value=1200; gg.gain.setValueAtTime(0,t); gg.gain.linearRampToValueAtTime(.09,t+1.3); gg.gain.setValueAtTime(.09,t+2.6); gg.gain.linearRampToValueAtTime(0,t+4.2); o.connect(f1); f1.connect(f2); f2.connect(gg); gg.connect(SND.master); o.start(t); o.stop(t+4.3); };
-  om(); SND.chantTimer=setInterval(om,7000); }
-function droneStop(){ if(!SND.drone) return; const c=SND.ctx; SND.drone.g.gain.linearRampToValueAtTime(0,c.currentTime+2.5); const d=SND.drone; setTimeout(()=>{ d.oscs.forEach(o=>{try{o.stop()}catch(e){}}); try{d.lfo.stop()}catch(e){} },2700); SND.drone=null; clearInterval(SND.chantTimer); }
-function ghantiStart(ms=6500){ let i=0; SND.ghantiTimer=setInterval(()=>{ ghanti(); if(++i>ms/260) clearInterval(SND.ghantiTimer); },260); }
-
-
-/* ---------- ambience: crowd murmur, footsteps, distant bells ---------- */
-const AMB={bed:null,steps:null,far:null,
-  scene(id){ const c=SND.ctx; if(!c) return;
-    const stage=WALKSTAGE; const outdoor=(id==='gate'&&stage>=0&&stage<2), walking=(id==='gate'&&stage>=0&&stage<4), inside=(id==='gate'&&stage>=2&&stage<4);
-    this.murmur(id==='gate'? (outdoor?.09:.045):0); this.footsteps(walking); this.farBells(inside); },
-  murmur(level){ const c=SND.ctx; if(!this.bed){ const buf=c.createBuffer(1,c.sampleRate*3,c.sampleRate),d=buf.getChannelData(0); let l=0; for(let i=0;i<d.length;i++){ const w=Math.random()*2-1; l=(l+.02*w)/1.02; d[i]=l*3.5; } const n=c.createBufferSource(); n.buffer=buf; n.loop=true; const bp=c.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=520; bp.Q.value=.6; const g=c.createGain(); g.gain.value=0; const lfo=c.createOscillator(),lg=c.createGain(); lfo.frequency.value=.21; lg.gain.value=.35; lfo.connect(lg); lg.connect(g.gain); n.connect(bp); bp.connect(g); g.connect(SND.master); n.start(); lfo.start(); this.bed={g}; }
-    this.bed.g.gain.setTargetAtTime(level,c.currentTime,1.2); },
-  footsteps(on){ if(on&&!this.steps){ const step=()=>{ const c=SND.ctx,t=c.currentTime; const buf=c.createBuffer(1,c.sampleRate*.12,c.sampleRate),d=buf.getChannelData(0); for(let i=0;i<d.length;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,3); const n=c.createBufferSource(); n.buffer=buf; const f=c.createBiquadFilter(); f.type='lowpass'; f.frequency.value=380+Math.random()*120; const g=c.createGain(); g.gain.value=.22; n.connect(f); f.connect(g); g.connect(SND.master); n.start(t); };
-      step(); this.steps=setInterval(step,620); } else if(!on&&this.steps){ clearInterval(this.steps); this.steps=null; } },
-  farBells(on){ if(on&&!this.far){ this.far=setInterval(()=>{ if(Math.random()<.7) bell(.18,440+Math.random()*200,3); },5200); } else if(!on&&this.far){ clearInterval(this.far); this.far=null; } }
+/* ---------- ambience per scene (real beds) ---------- */
+const AMB={
+  scene(id){ if(!SND.on||!SND.ctx) return;
+    const stage=WALKSTAGE; const walking=(id==='gate'&&stage>=0&&stage<4), outdoor=(id==='gate'&&stage>=0&&stage<2), inside=(id==='gate'&&stage>=2&&stage<4)||GARBHA.has(id);
+    if(outdoor) loopStart('outdoor',.9,2); else loopStop('outdoor',2);
+    if(inside) loopStart('sanctum',.8,2); else loopStop('sanctum',2);
+    if(walking) loopStart('steps',.7,.5); else loopStop('steps',.8);
+    if(GARBHA.has(id)&&id!=='sanctum'&&id!=='ritual') loopLevel('sanctum',.5); else if(GARBHA.has(id)) loopLevel('sanctum',.8); }
 };
 
 /* ---------- 1 · gate ---------- */
@@ -422,9 +406,9 @@ const CUES=[[0,'Toward the gopura…','Yellammana Gudda, Saundatti'],[8.0,'Into 
 function play(v,at=0){ try{ v.currentTime=at; const p=v.play(); if(p&&p.catch) p.catch(()=>{}); }catch(e){} }
 let RIT=null; // the clip currently playing a ritual — never reset by warm()
 function warm(v){ if(v===RIT) return; try{ v.load(); v.muted=true; const p=v.play(); if(p&&p.then) p.then(()=>{ if(v===RIT) return; v.pause(); v.currentTime=0; }).catch(()=>{}); }catch(e){} }
-function openDoors(){ if(opened) return; opened=true; ac(); $('#gate').classList.add('open'); $('#skipBtn').hidden=false; $('#walkCap').hidden=false; WALKSTAGE=0; AMB.scene('gate');
+function openDoors(){ if(opened) return; opened=true; if(SND.on) ac(); $('#gate').classList.add('open'); $('#skipBtn').hidden=false; $('#walkCap').hidden=false; WALKSTAGE=0; $('#capK').textContent=CUES[0][1]; $('#capS').textContent=CUES[0][2]; AMB.scene('gate');
   [V.dar].forEach(warm); setTimeout(shankha,600); play(V.j);
-  V.j.ontimeupdate=()=>{ const t=V.j.currentTime; let i=0; for(let k=0;k<CUES.length;k++) if(t>=CUES[k][0]) i=k; if(i!==WALKSTAGE){ WALKSTAGE=i; AMB.scene('gate'); $('#capK').textContent=CUES[i][1]; $('#capS').textContent=CUES[i][2]; if(i===1) setTimeout(()=>bell(.6,520,5),2500); if(i===2) setTimeout(()=>{ ghanti(); setTimeout(ghanti,400); },3200); if(i===3) setTimeout(()=>bell(.9,610,5),1800); } };
+  V.j.ontimeupdate=()=>{ const t=V.j.currentTime; let i=0; for(let k=0;k<CUES.length;k++) if(t>=CUES[k][0]) i=k; if(i!==WALKSTAGE){ WALKSTAGE=i; AMB.scene('gate'); $('#capK').textContent=CUES[i][1]; $('#capS').textContent=CUES[i][2]; if(i===1) setTimeout(()=>bell(.6),2500); if(i===2) setTimeout(()=>ghantiStart(3500),3000); if(i===3) setTimeout(()=>bell(.9),1800); } };
   V.j.onended=enterSanctum; }
 function enterSanctum(){ if(WALKSTAGE===4) return; WALKSTAGE=4; const g=$('#gate'); g.classList.add('hold'); $('#skipBtn').hidden=true; $('#walkCap').hidden=true;
   // start the sanctum loop first; release the held last frame only once the loop has painted
@@ -467,14 +451,14 @@ function submit(s){ const rec={time:new Date().toISOString(),name:s.name,phone:s
   return new Promise(res=>{ const f=document.createElement('form'); f.method='POST'; f.target='gform_sink'; f.action=`https://docs.google.com/forms/d/e/${CONFIG.formId}/formResponse`; f.style.display='none';
     const E=CONFIG.entries; const map={[E.name]:rec.name,[E.phone]:rec.phone,[E.response]:rec.response,[E.count]:String(rec.count),[E.message]:rec.message,[E.ref]:rec.ref};
     Object.entries(map).forEach(([k,v])=>{ if(!k) return; const i=document.createElement('input'); i.name=k; i.value=v; f.appendChild(i); });
-    document.body.appendChild(f); f.submit(); setTimeout(()=>{ f.remove(); res(); },900); }); }
+    document.body.appendChild(f); f.submit(); setTimeout(()=>f.remove(),4000); setTimeout(res,150); }); }
 
 /* ---------- 6 · ritual ---------- */
 function runRitual(){ const r=$('#ritual'); r.classList.remove('yes','maybe','no'); r.classList.add(state.response);
   const K=$('#ritK'),S=$('#ritS'); let dur,cls,vid,onstart; const g=$('#garbha'); g.classList.remove('aarti','flowers','sun');
-  if(state.response==='yes'){ K.textContent='Your aarti is offered'; S.textContent='Udho Udho! We will see you on 18 November.'; dur=7200; cls='aarti'; vid=V.aarti; onstart=()=>{ setTimeout(()=>{ ringBells(); ghantiStart(6000); },300); }; }
-  else if(state.response==='maybe'){ K.textContent='Your flowers are offered'; S.textContent='May Devi make the way easy for you to join us.'; dur=7000; cls='flowers'; vid=V.flower; onstart=()=>setTimeout(()=>bell(.9,520,5),400); }
-  else { K.textContent='Her blessings reach you'; S.textContent='Thank you — your wishes reach us and our parents.'; dur=7000; cls='sun'; vid=V.sun; onstart=()=>{ setTimeout(()=>bell(.9,610,5),300); setTimeout(shankha,2000); }; }
+  if(state.response==='yes'){ K.textContent='Your aarti is offered'; S.textContent='Udho Udho! We will see you on 18 November.'; dur=7200; cls='aarti'; vid=V.aarti; onstart=()=>{ try{V.dar.pause();}catch(e){} setTimeout(()=>{ bell(.8); ghantiStart(6200); },200); }; }
+  else if(state.response==='maybe'){ K.textContent='Your flowers are offered'; S.textContent='May Devi make the way easy for you to join us.'; dur=7000; cls='flowers'; vid=V.flower; onstart=()=>{ try{V.dar.pause();}catch(e){} setTimeout(()=>bell(.9),400); }; }
+  else { K.textContent='Her blessings reach you'; S.textContent='Thank you — your wishes reach us and our parents.'; dur=7000; cls='sun'; vid=V.sun; onstart=()=>{ try{V.dar.pause();}catch(e){} setTimeout(()=>bell(.9),300); setTimeout(shankha,1800); }; }
   RIT=vid; show('ritual');
   // Reveal the clip only once it is really painting frames; if the network is too slow, fall back to the real still (poster) instead of a black plate.
   let started=false; const start=(live)=>{ if(started) return; started=true; vid.classList.toggle('off',!live); g.classList.add(cls); onstart(); setTimeout(showDone,dur); };
@@ -483,7 +467,7 @@ function runRitual(){ const r=$('#ritual'); r.classList.remove('yes','maybe','no
   play(vid,0); setTimeout(()=>start(vid.readyState>=2&&!vid.paused),5000); }
 
 /* ---------- 7 · done ---------- */
-function showDone(){ droneStop(); RIT=null; $('#garbha').classList.remove('aarti','flowers','sun'); [V.aarti,V.flower,V.sun].forEach(v=>{ try{v.pause();}catch(e){} v.classList.remove('off'); }); const s=state; const [act,word]=LABELS[s.response];
+function showDone(){ droneStop(); RIT=null; play(V.dar,V.dar.currentTime||0); $('#garbha').classList.remove('aarti','flowers','sun'); [V.aarti,V.flower,V.sun].forEach(v=>{ try{v.pause();}catch(e){} v.classList.remove('off'); }); const s=state; const [act,word]=LABELS[s.response];
   $('#doneH').textContent= s.response==='yes'?'We look forward to welcoming you!': s.response==='maybe'?'Thank you — we hope you can make it':'Thank you for your blessings';
   $('#doneSub').innerHTML= s.response==='no'? 'Your response is recorded. Suman &amp; Sreedhar send their love.' : 'Your response is recorded. Wednesday, 18 November 2026 · 8:30 AM – 12:30 PM, lunch from 1:00 PM.';
   $('#sum').innerHTML=`<div class="line"><span>Response</span><b>${word}</b></div><div class="line"><span>Offering</span><b>${act}</b></div>${s.response!=='no'?`<div class="line"><span>Guests</span><b>${s.count}</b></div>`:''}<div class="line"><span>Name</span><b>${esc(s.name)}</b></div>`;
