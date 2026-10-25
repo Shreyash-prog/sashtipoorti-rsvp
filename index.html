@@ -17,25 +17,18 @@ html,body{height:100%}
 body{margin:0;background:#0b0604;color:var(--ink);font-family:var(--sans);overflow:hidden;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased}
 button{font:inherit;color:inherit;cursor:pointer}
 #stage{position:fixed;inset:0;margin:auto;width:100%;max-width:560px;height:100%;background:#0b0604;overflow:hidden;box-shadow:0 0 0 1px #1d1109,0 0 120px #000}
-#cam{position:absolute;inset:-2.5%;animation:hand 7s ease-in-out infinite}
-#cam.walking{animation:handwalk .62s ease-in-out infinite,hand 7s ease-in-out infinite}
-@keyframes hand{0%,100%{transform:translate(0,0) rotate(0)}25%{transform:translate(3px,-2px) rotate(.15deg)}50%{transform:translate(-2px,2px) rotate(-.12deg)}75%{transform:translate(2px,3px) rotate(.08deg)}}
-@keyframes handwalk{0%,100%{margin-top:0}50%{margin-top:-6px}}
+#cam{position:absolute;inset:0}
 .scene{position:absolute;inset:0;opacity:0;visibility:hidden;pointer-events:none;transition:opacity 1.2s ease,visibility 0s linear 1.2s}
 .scene.on{opacity:1;visibility:visible;pointer-events:auto;transition:opacity 1.2s ease,visibility 0s}
 .plate{position:absolute;inset:0;overflow:hidden}
 .plate img,.plate video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block;background:#0b0604}
 .plate .lq{filter:blur(12px);transform:scale(1.06)}
 /* FX layers */
-#fx-grain{position:absolute;inset:0;z-index:40;pointer-events:none;mix-blend-mode:soft-light;opacity:.09;width:100%;height:100%}
 #fx-vig{position:absolute;inset:0;z-index:41;pointer-events:none;background:radial-gradient(ellipse at 50% 48%,transparent 50%,rgba(0,0,0,.5) 100%)}
 #fx-grade{position:absolute;inset:0;z-index:39;pointer-events:none;mix-blend-mode:soft-light;opacity:.32;transition:opacity 1.5s;background:linear-gradient(180deg,#ffb86b 0%,#ff9a3c 50%,#3b1a05 100%)}
-#fx-flare{position:absolute;inset:0;z-index:38;pointer-events:none;opacity:0;transition:opacity 1.5s;background:
   radial-gradient(circle at 14% 8%,rgba(255,250,230,.6),rgba(255,230,180,.2) 10%,transparent 24%),
   radial-gradient(circle at 32% 26%,rgba(255,220,160,.18),transparent 8%)}
-body.outdoor #fx-flare{opacity:1}
-body.outdoor #fx-grade{opacity:.12}
-#fx-smoke,#fx-dust{position:absolute;inset:0;z-index:7;pointer-events:none;width:100%;height:100%}
+body.outdoor body.outdoor #fx-grade{opacity:.12}
 /* ---------- top bar ---------- */
 #bar{position:absolute;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:calc(10px + env(safe-area-inset-top)) 14px 0}
 #bar .brand{font-family:var(--serif);font-size:15px;letter-spacing:.5px;color:var(--ink-dim);text-shadow:0 1px 4px #000}
@@ -122,14 +115,6 @@ body.outdoor #fx-grade{opacity:.12}
 .row .cta{flex:1;justify-content:center}
 .err{color:#ffb3a3;font-size:12.5px;text-align:center;min-height:16px;margin-top:6px}
 
-.flower{position:absolute;left:50%;top:-10%;width:46px;height:46px;margin-left:-23px;z-index:9;opacity:0}
-#ritual.maybe .flower{animation:fall 3.2s cubic-bezier(.4,0,.6,1) forwards}
-#ritual.maybe .flower.f2{animation-delay:.5s;margin-left:-60px}
-#ritual.maybe .flower.f3{animation-delay:.9s;margin-left:14px}
-@keyframes fall{0%{opacity:0;transform:translateY(0) rotate(0)}10%{opacity:1}100%{opacity:1;transform:translateY(64vh) rotate(260deg)}}
-.tilak{position:absolute;left:50%;top:40%;width:70px;height:70px;margin:-35px 0 0 -35px;z-index:9;opacity:0;border-radius:50%;background:radial-gradient(circle,#ffe39a,#ff8a1e 45%,#b3302f 70%,transparent 72%);box-shadow:0 0 40px rgba(255,160,60,.8)}
-#ritual.no .tilak{animation:bless 3.2s ease-out forwards}
-@keyframes bless{0%{opacity:0;transform:scale(.3)}30%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(2.2)}}
 .ritual-cap{position:absolute;left:0;right:0;bottom:7%;text-align:center;padding:0 24px;z-index:9}
 .ritual-cap .k{font-family:var(--serif);font-size:24px;font-weight:600;text-shadow:0 2px 10px #000}
 .ritual-cap .s{font-size:13px;color:var(--ink-dim);margin-top:6px;text-shadow:0 1px 6px #000}
@@ -194,24 +179,17 @@ body.outdoor #fx-grade{opacity:.12}
 #gate.open .zoom{transform:scale(2.6);opacity:0}
 #doorway{position:absolute;z-index:3;perspective:1100px;overflow:hidden;background:#0b0604;box-shadow:inset 0 0 40px rgba(0,0,0,.8)}
 #inner{position:absolute;inset:0;background:#0b0604 url(img/court.jpg) 50% 40%/cover no-repeat;filter:brightness(.85)}
-#people{position:absolute;inset:0;z-index:5;pointer-events:none;animation:walkin 9s ease-in-out infinite alternate}
 #people img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block}
-@keyframes walkin{from{transform:translateY(0) scale(1)}to{transform:translateY(4px) scale(1.02)}}
 #gate.open .door.l{transform:rotateY(-108deg)}
 #gate.open .door.r{transform:rotateY(108deg)}
-#gate.open #people{transition:opacity 1.2s ease .9s;opacity:0}
-#gate.open .hint{transition:opacity .4s;opacity:0;pointer-events:none}
+#gate.open #gate.open .hint{transition:opacity .4s;opacity:0;pointer-events:none}
 .gate-sign{position:absolute;left:0;right:0;top:calc(58px + env(safe-area-inset-top));text-align:center;z-index:6;pointer-events:none}
 .gate-sign .k{font-family:var(--serif);font-size:15px;letter-spacing:.5px;color:#fff;text-shadow:0 1px 6px #000,0 0 18px rgba(0,0,0,.8)}
 /* ---------- 2. courtyard / mandapa ---------- */
 #court .plate img.hi{transform-origin:48% 62%}
 
-@keyframes pushCourt{from{transform:scale(1) translateY(0)}to{transform:scale(1.42) translateY(6%)}}
 #mandapa .plate img.hi{transform-origin:50% 47%}
 
-@keyframes pushMand{from{transform:scale(1)}to{transform:scale(2.3) translateY(1%)}}
-.shaftlight{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;opacity:.0;background:radial-gradient(ellipse at 78% 40%,rgba(255,220,170,.35),transparent 45%);animation:shaftpulse 5s ease-in-out infinite alternate}
-@keyframes shaftpulse{from{opacity:.25}to{opacity:.6}}
 /* ---------- 3. garbhagriha (persistent) ---------- */
 #garbha{position:absolute;inset:0;z-index:1;opacity:0;visibility:hidden;transition:opacity 1.5s ease,visibility 0s linear 1.5s,filter .8s}
 #sanctum,#offer,#thali,#ritual,#done{z-index:8}
@@ -219,36 +197,15 @@ body.outdoor #fx-grade{opacity:.12}
 #garbha.on{opacity:1;visibility:visible;transition:opacity 1.5s ease,visibility 0s,filter .8s}
 #garbha.dim{filter:brightness(.5) saturate(.9)}
 
-@keyframes breathe{from{transform:scale(1.02)}to{transform:scale(1.08)}}
-.lampglow{position:absolute;width:30%;height:22%;pointer-events:none;mix-blend-mode:screen;background:radial-gradient(ellipse at 50% 60%,rgba(255,190,90,.55),rgba(255,150,50,.2) 45%,transparent 70%);animation:lg .9s ease-in-out infinite alternate}
-.lampglow.l{left:0;top:40%}.lampglow.r{right:0;top:40%;animation-duration:1.15s;animation-delay:.3s}
-.lampglow.alt{top:52%;width:22%;height:14%;animation-duration:.7s;animation-delay:.2s;opacity:.7}
-@keyframes lg{from{opacity:.55;transform:scale(.96)}to{opacity:1;transform:scale(1.06)}}
-.devilight{position:absolute;left:18%;right:18%;top:10%;height:56%;pointer-events:none;mix-blend-mode:overlay;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,230,160,.85),rgba(255,170,60,.35) 35%,rgba(255,120,20,0) 65%) 50% 40%/180% 140% no-repeat;animation:lightorbit 7s ease-in-out infinite}
-@keyframes lightorbit{0%{background-position:50% 45%}20%{background-position:15% 25%}40%{background-position:50% 5%}60%{background-position:85% 25%}80%{background-position:55% 70%}100%{background-position:50% 45%}}
 .aarti-plate{position:absolute;inset:0;opacity:0;transition:opacity 1.6s ease;z-index:6}
-.aarti-plate img.hi{transform-origin:50% 45%}
 #garbha.aarti .aarti-plate{opacity:1}
 
-@keyframes aartiZoom{from{transform:scale(1.02)}to{transform:scale(1.14) translateY(-2%)}}
-.aarti-plate .flameglow{position:absolute;left:30%;top:48%;width:40%;height:22%;mix-blend-mode:screen;background:radial-gradient(ellipse,rgba(255,200,100,.7),rgba(255,140,40,.25) 45%,transparent 70%);animation:lg .5s ease-in-out infinite alternate;pointer-events:none}
-.bell{position:absolute;top:0;width:38px;height:140px;z-index:4;transform-origin:50% 0;opacity:.9}
-.bell.l{left:10%}.bell.r{right:10%}
-.bell .rope{position:absolute;left:50%;top:0;width:4px;height:62%;background:repeating-linear-gradient(#6a5330 0 4px,#3f2f16 4px 8px);transform:translateX(-50%)}
-.bell .body{position:absolute;left:50%;top:60%;transform:translateX(-50%);width:38px;height:40px;border-radius:50% 50% 8px 8px/70% 70% 8px 8px;background:radial-gradient(ellipse at 35% 30%,#fff0b0,#d7a63a 45%,#7a540e 90%);box-shadow:0 4px 8px rgba(0,0,0,.7),inset -4px -4px 8px rgba(0,0,0,.35)}
-.bell .body::after{content:"";position:absolute;left:50%;bottom:-7px;width:10px;height:10px;transform:translateX(-50%);border-radius:50%;background:#c99a2e}
-.bell.ring{animation:ring 1.4s ease-in-out}
-@keyframes ring{0%,100%{transform:rotate(0)}15%{transform:rotate(16deg)}35%{transform:rotate(-14deg)}55%{transform:rotate(9deg)}75%{transform:rotate(-5deg)}}
-.tilak{position:absolute;left:50%;top:38%;width:70px;height:70px;margin:-35px 0 0 -35px;z-index:9;opacity:0;border-radius:50%;background:radial-gradient(circle,#ffe39a,#ff8a1e 45%,#b3302f 70%,transparent 72%);box-shadow:0 0 40px rgba(255,160,60,.8)}
-#ritual.no .tilak{animation:bless 3.2s ease-out forwards}
-@keyframes bless{0%{opacity:0;transform:scale(.3)}30%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(2.2)}}
-.ritual-cap{position:absolute;left:0;right:0;bottom:7%;text-align:center;padding:0 24px;z-index:9}
+#ritual.no .ritual-cap{position:absolute;left:0;right:0;bottom:7%;text-align:center;padding:0 24px;z-index:9}
 .ritual-cap .k{font-family:var(--serif);font-size:24px;font-weight:600;text-shadow:0 2px 10px #000}
 .ritual-cap .s{font-size:13px;color:var(--ink-dim);margin-top:6px;text-shadow:0 1px 6px #000}
 #sanctum,#offer,#thali,#ritual,#done{background:transparent}
 @media (min-width:600px){#stage{height:min(100%,960px)}}
-@media (prefers-reduced-motion:reduce){.door{transition-duration:.6s}#court.on .plate img.hi,#mandapa.on .plate img.hi{animation-duration:1.5s}#cam{animation:none}}
+
 </style>
 </head>
 <body>
@@ -280,12 +237,9 @@ body.outdoor #fx-grade{opacity:.12}
   <!-- 3 · GARBHAGRIHA (persistent backdrop) -->
   <div id="garbha" aria-hidden="true">
     <div class="plate"><img class="lq" src="img/darshan_lq.jpg" alt=""><video id="darVid" class="hi" playsinline muted loop preload="auto" poster="img/darshan.jpg"><source src="vid/darshan_loop.mp4" type="video/mp4"></video></div>
-        <div class="bell l" id="bellL"><div class="rope"></div><div class="body"></div></div>
-    <div class="bell r" id="bellR"><div class="rope"></div><div class="body"></div></div>
-    <div class="aarti-plate plate"><video id="aartiVid" class="hi" playsinline muted preload="none" poster="img/aarti.jpg"><source src="vid/aarti.mp4" type="video/mp4"></video></div>
-    <div class="ritual-plate plate" id="flowerPlate"><video id="flowerVid" class="hi" playsinline muted preload="none" poster="img/darshan.jpg"><source src="vid/flowers.mp4" type="video/mp4"></video></div>
-    <div class="ritual-plate plate" id="sunPlate"><video id="sunVid" class="hi" playsinline muted preload="none" poster="img/darshan.jpg"><source src="vid/sunray.mp4" type="video/mp4"></video></div>
-    <canvas id="fx-smoke"></canvas>
+    <div class="aarti-plate plate"><img class="still" src="img/aarti.jpg" alt=""><video id="aartiVid" class="hi" playsinline muted preload="auto" poster="img/aarti.jpg"><source src="vid/aarti.mp4" type="video/mp4"></video></div>
+    <div class="ritual-plate plate" id="flowerPlate"><video id="flowerVid" class="hi" playsinline muted preload="auto" poster="img/darshan.jpg"><source src="vid/flowers.mp4" type="video/mp4"></video></div>
+    <div class="ritual-plate plate" id="sunPlate"><video id="sunVid" class="hi" playsinline muted preload="auto" poster="img/darshan.jpg"><source src="vid/sunray.mp4" type="video/mp4"></video></div>
   </div>
 
   <!-- 3 · SANCTUM text -->
@@ -393,9 +347,7 @@ body.outdoor #fx-grade{opacity:.12}
   </section>
 
   </div><!-- /cam -->
-  <div id="fx-flare"></div>
   <div id="fx-grade"></div>
-  <canvas id="fx-grain"></canvas>
   <div id="fx-vig"></div>
 </div>
 
@@ -425,7 +377,7 @@ const GARBHA=new Set(['sanctum','offer','thali','ritual','done']), DIM=new Set([
 function show(id){ scenes.forEach(s=>s.classList.toggle('on',s.id===id)); current=id;
   const g=$('#garbha'); g.classList.toggle('on',GARBHA.has(id)); g.classList.toggle('dim',DIM.has(id));
   document.body.classList.toggle('outdoor',OUTDOOR.has(id)); $('#cam').classList.toggle('walking',WALK.has(id));
-  FX.smoke(GARBHA.has(id)); AMB.scene(id); }
+  AMB.scene(id); }
 
 /* ---------- sound engine (synthesised; no files) ---------- */
 const SND={ctx:null,on:true,master:null,drone:null,chantTimer:null,ghantiTimer:null};
@@ -451,29 +403,6 @@ function droneStop(){ if(!SND.drone) return; const c=SND.ctx; SND.drone.g.gain.l
 function ghantiStart(ms=6500){ let i=0; SND.ghantiTimer=setInterval(()=>{ ghanti(); if(++i>ms/260) clearInterval(SND.ghantiTimer); },260); }
 
 
-/* ---------- FX: grain, incense smoke, dust motes ---------- */
-const FX=(()=>{
-  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const gc=$('#fx-grain'), gx=gc.getContext('2d',{alpha:true}); let gw=0,gh=0,gimg;
-  function sizeGrain(){ const r=$('#stage').getBoundingClientRect(); gw=Math.max(120,Math.round(r.width/2)); gh=Math.max(200,Math.round(r.height/2)); gc.width=gw; gc.height=gh; gimg=gx.createImageData(gw,gh); }
-  sizeGrain(); addEventListener('resize',sizeGrain);
-  let gt=0; function grain(t){ if(!reduce && t-gt>42){ gt=t; const d=gimg.data; for(let i=0;i<d.length;i+=4){ const v=(Math.random()*255)|0; d[i]=d[i+1]=d[i+2]=v; d[i+3]=255; } gx.putImageData(gimg,0,0); } requestAnimationFrame(grain); }
-  requestAnimationFrame(grain);
-  const sc=$('#fx-smoke'), sx=sc.getContext('2d'); let smokeOn=false, parts=[];
-  function sizeSmoke(){ const r=$('#stage').getBoundingClientRect(); sc.width=r.width; sc.height=r.height; }
-  sizeSmoke(); addEventListener('resize',sizeSmoke);
-  function smokeLoop(){ if(!smokeOn){ sx.clearRect(0,0,sc.width,sc.height); return; }
-    sx.clearRect(0,0,sc.width,sc.height); const ox=sc.width*0.5, oy=sc.height*0.74;
-    if(parts.length<70 && Math.random()<.5) parts.push({x:ox+(Math.random()-.5)*14,y:oy,vx:(Math.random()-.5)*.25,vy:-(.45+Math.random()*.4),r:6+Math.random()*6,a:0,life:0,drift:Math.random()*6.28});
-    sx.globalCompositeOperation='screen';
-    for(const p of parts){ p.life+=1; p.x+=p.vx+Math.sin(p.life/28+p.drift)*.28; p.y+=p.vy; p.r+=.16; p.a=Math.min(.16,p.life/60*.16)*(1-p.life/320);
-      const g=sx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r); g.addColorStop(0,`rgba(230,215,190,${p.a})`); g.addColorStop(1,'rgba(230,215,190,0)'); sx.fillStyle=g; sx.beginPath(); sx.arc(p.x,p.y,p.r,0,6.283); sx.fill(); }
-    parts=parts.filter(p=>p.life<320); requestAnimationFrame(smokeLoop); }
-  let dustOn=false, motes=[];
-    return { smoke(on){ if(reduce) return; if(on&&!smokeOn){ smokeOn=true; requestAnimationFrame(smokeLoop);} else if(!on) smokeOn=false; },
-           dust(on){} };
-})();
-
 /* ---------- ambience: crowd murmur, footsteps, distant bells ---------- */
 const AMB={bed:null,steps:null,far:null,
   scene(id){ const c=SND.ctx; if(!c) return;
@@ -491,22 +420,24 @@ let opened=false, WALKSTAGE=-1;
 const V={j:$('#journey'),dar:$('#darVid'),aarti:$('#aartiVid'),flower:$('#flowerVid'),sun:$('#sunVid')};
 const CUES=[[0,'Toward the gopura…','Yellammana Gudda, Saundatti'],[8.0,'Into the courtyard…','Mind your head — the temple door is kept low'],[15.1,'Through the mandapa…','Take the aarti from the pujari; the Devi waits ahead'],[25.1,'Into the garbhagriha…','Bow once more at the inner door']];
 function play(v,at=0){ try{ v.currentTime=at; const p=v.play(); if(p&&p.catch) p.catch(()=>{}); }catch(e){} }
-function warm(v){ try{ v.load(); v.muted=true; const p=v.play(); if(p&&p.then) p.then(()=>{ v.pause(); v.currentTime=0; }).catch(()=>{}); }catch(e){} }
+let RIT=null; // the clip currently playing a ritual — never reset by warm()
+function warm(v){ if(v===RIT) return; try{ v.load(); v.muted=true; const p=v.play(); if(p&&p.then) p.then(()=>{ if(v===RIT) return; v.pause(); v.currentTime=0; }).catch(()=>{}); }catch(e){} }
 function openDoors(){ if(opened) return; opened=true; ac(); $('#gate').classList.add('open'); $('#skipBtn').hidden=false; $('#walkCap').hidden=false; WALKSTAGE=0; AMB.scene('gate');
   [V.dar].forEach(warm); setTimeout(shankha,600); play(V.j);
   V.j.ontimeupdate=()=>{ const t=V.j.currentTime; let i=0; for(let k=0;k<CUES.length;k++) if(t>=CUES[k][0]) i=k; if(i!==WALKSTAGE){ WALKSTAGE=i; AMB.scene('gate'); $('#capK').textContent=CUES[i][1]; $('#capS').textContent=CUES[i][2]; if(i===1) setTimeout(()=>bell(.6,520,5),2500); if(i===2) setTimeout(()=>{ ghanti(); setTimeout(ghanti,400); },3200); if(i===3) setTimeout(()=>bell(.9,610,5),1800); } };
   V.j.onended=enterSanctum; }
 function enterSanctum(){ if(WALKSTAGE===4) return; WALKSTAGE=4; const g=$('#gate'); g.classList.add('hold'); $('#skipBtn').hidden=true; $('#walkCap').hidden=true;
   // start the sanctum loop first; release the held last frame only once the loop has painted
-  const release=()=>{ g.classList.remove('hold'); show('sanctum'); try{ V.j.pause(); }catch(e){} droneStart(); setTimeout(()=>ringBells('#bellL','#bellR'),600); };
+  const release=()=>{ g.classList.remove('hold'); show('sanctum'); try{ V.j.pause(); }catch(e){} droneStart(); setTimeout(ringBells,600); };
   $('#garbha').classList.add('on'); let done=false; const once=()=>{ if(done) return; done=true; release(); };
   if('requestVideoFrameCallback' in V.dar){ V.dar.requestVideoFrameCallback(once); } else { V.dar.addEventListener('playing',once,{once:true}); }
-  play(V.dar,0); setTimeout(once,700); }
+  play(V.dar,0); setTimeout(once,700);
+  setTimeout(()=>warm(V.aarti),1500); setTimeout(()=>warm(V.flower),4000); setTimeout(()=>warm(V.sun),6500); }
 $('#pushBtn').addEventListener('click',openDoors);
 $('#skipBtn').addEventListener('click',()=>{ enterSanctum(); setTimeout(()=>show('offer'),900); });
 
 /* ---------- 3 · sanctum ---------- */
-function ringBells(a,b){ [a,b].forEach((s,i)=>{ const el=$(s); setTimeout(()=>{ el.classList.remove('ring'); void el.offsetWidth; el.classList.add('ring'); bell(.8,i?610:520,5); },i*700); }); }
+function ringBells(){ [0,1].forEach(i=>setTimeout(()=>bell(.8,i?610:520,5),i*700)); }
 $('#toOffer').addEventListener('click',()=>{ show('offer'); });
 
 /* ---------- 4 · offering ---------- */
@@ -540,14 +471,19 @@ function submit(s){ const rec={time:new Date().toISOString(),name:s.name,phone:s
 
 /* ---------- 6 · ritual ---------- */
 function runRitual(){ const r=$('#ritual'); r.classList.remove('yes','maybe','no'); r.classList.add(state.response);
-  const K=$('#ritK'),S=$('#ritS'); let dur; const g=$('#garbha'); g.classList.remove('aarti','flowers','sun');
-  if(state.response==='yes'){ K.textContent='Your aarti is offered'; S.textContent='Udho Udho! We will see you on 18 November.'; dur=7200; g.classList.add('aarti'); play(V.aarti); setTimeout(()=>{ ringBells('#bellL','#bellR'); ghantiStart(6000); },500); }
-  else if(state.response==='maybe'){ K.textContent='Your flowers are offered'; S.textContent='May Devi make the way easy for you to join us.'; dur=7000; g.classList.add('flowers'); play(V.flower); setTimeout(()=>bell(.9,520,5),600); }
-  else { K.textContent='Her blessings reach you'; S.textContent='Thank you — your wishes reach us and our parents.'; dur=7000; g.classList.add('sun'); play(V.sun); setTimeout(()=>bell(.9,610,5),500); setTimeout(shankha,2200); }
-  show('ritual'); setTimeout(()=>{ showDone(); },dur); }
+  const K=$('#ritK'),S=$('#ritS'); let dur,cls,vid,onstart; const g=$('#garbha'); g.classList.remove('aarti','flowers','sun');
+  if(state.response==='yes'){ K.textContent='Your aarti is offered'; S.textContent='Udho Udho! We will see you on 18 November.'; dur=7200; cls='aarti'; vid=V.aarti; onstart=()=>{ setTimeout(()=>{ ringBells(); ghantiStart(6000); },300); }; }
+  else if(state.response==='maybe'){ K.textContent='Your flowers are offered'; S.textContent='May Devi make the way easy for you to join us.'; dur=7000; cls='flowers'; vid=V.flower; onstart=()=>setTimeout(()=>bell(.9,520,5),400); }
+  else { K.textContent='Her blessings reach you'; S.textContent='Thank you — your wishes reach us and our parents.'; dur=7000; cls='sun'; vid=V.sun; onstart=()=>{ setTimeout(()=>bell(.9,610,5),300); setTimeout(shankha,2000); }; }
+  RIT=vid; show('ritual');
+  // Reveal the clip only once it is really painting frames; if the network is too slow, fall back to the real still (poster) instead of a black plate.
+  let started=false; const start=(live)=>{ if(started) return; started=true; vid.classList.toggle('off',!live); g.classList.add(cls); onstart(); setTimeout(showDone,dur); };
+  const live=()=>{ if(started) vid.classList.remove('off'); else start(true); };
+  if('requestVideoFrameCallback' in vid) vid.requestVideoFrameCallback(live); else vid.addEventListener('playing',live,{once:true});
+  play(vid,0); setTimeout(()=>start(vid.readyState>=2&&!vid.paused),5000); }
 
 /* ---------- 7 · done ---------- */
-function showDone(){ droneStop(); $('#garbha').classList.remove('aarti','flowers','sun'); const s=state; const [act,word]=LABELS[s.response];
+function showDone(){ droneStop(); RIT=null; $('#garbha').classList.remove('aarti','flowers','sun'); [V.aarti,V.flower,V.sun].forEach(v=>{ try{v.pause();}catch(e){} v.classList.remove('off'); }); const s=state; const [act,word]=LABELS[s.response];
   $('#doneH').textContent= s.response==='yes'?'We look forward to welcoming you!': s.response==='maybe'?'Thank you — we hope you can make it':'Thank you for your blessings';
   $('#doneSub').innerHTML= s.response==='no'? 'Your response is recorded. Suman &amp; Sreedhar send their love.' : 'Your response is recorded. Wednesday, 18 November 2026 · 8:30 AM – 12:30 PM, lunch from 1:00 PM.';
   $('#sum').innerHTML=`<div class="line"><span>Response</span><b>${word}</b></div><div class="line"><span>Offering</span><b>${act}</b></div>${s.response!=='no'?`<div class="line"><span>Guests</span><b>${s.count}</b></div>`:''}<div class="line"><span>Name</span><b>${esc(s.name)}</b></div>`;
