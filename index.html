@@ -363,6 +363,11 @@ function show(id){ scenes.forEach(s=>s.classList.toggle('on',s.id===id)); curren
 /* ---------- sound engine: real recordings, Web Audio, OFF by default ---------- */
 const AUD={bed:'aud/bed.mp3?v=608c535207',bell:'aud/bell.mp3?v=a62018ac76',aarti:'aud/aarti.mp3?v=e8fea08085'}; // soft devotional bed (flute + tanpura), gentle bell, hushed ghanti
 const SND={ctx:null,on:false,master:null,raw:{},bufs:{},loops:{},silent:null};
+const IOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+// a real 2-second silent WAV (8 kHz, 8-bit mono). A zero-length looping file makes the media pipeline spin and starves the audio thread.
+function silentWav(sec){ const sr=8000,n=sr*sec,b=new ArrayBuffer(44+n),v=new DataView(b); const w=(o,s)=>{ for(let i=0;i<s.length;i++) v.setUint8(o+i,s.charCodeAt(i)); };
+  w(0,'RIFF'); v.setUint32(4,36+n,true); w(8,'WAVE'); w(12,'fmt '); v.setUint32(16,16,true); v.setUint16(20,1,true); v.setUint16(22,1,true); v.setUint32(24,sr,true); v.setUint32(28,sr,true); v.setUint16(32,1,true); v.setUint16(34,8,true); w(36,'data'); v.setUint32(40,n,true); new Uint8Array(b,44).fill(128);
+  return URL.createObjectURL(new Blob([b],{type:'audio/wav'})); }
 // fetch the recordings early (no gesture needed); decode once an AudioContext exists
 Object.entries(AUD).forEach(([k,u])=>{ fetch(u).then(r=>r.arrayBuffer()).then(ab=>{ SND.raw[k]=ab; if(SND.ctx) decode(k); }).catch(()=>{}); });
 function decode(k){ if(!SND.ctx||SND.bufs[k]||!SND.raw[k]) return; const ab=SND.raw[k].slice(0); const p=SND.ctx.decodeAudioData(ab,b=>{ SND.bufs[k]=b; },()=>{}); if(p&&p.then) p.then(b=>{ SND.bufs[k]=b; }).catch(()=>{}); }
@@ -370,7 +375,7 @@ function ac(){ try{
   if(!SND.ctx){ const C=window.AudioContext||window.webkitAudioContext; if(!C) return null; SND.ctx=new C(); SND.master=SND.ctx.createGain(); SND.master.gain.value=SND.on?1:0; SND.master.connect(SND.ctx.destination); Object.keys(AUD).forEach(decode); }
   if(SND.ctx.state==='suspended') SND.ctx.resume().catch(()=>{});
   // iOS: a (silent) media element started from a gesture moves audio to the playback session, so sound plays even with the ring/silent switch on
-  if(!SND.silent){ const a=new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAA='); a.loop=true; a.volume=0.01; a.setAttribute('playsinline',''); const p=a.play(); if(p&&p.catch) p.catch(()=>{}); SND.silent=a; }
+  if(!SND.silent&&IOS){ const a=new Audio(silentWav(2)); a.loop=true; a.volume=0.01; a.setAttribute('playsinline',''); const p=a.play(); if(p&&p.catch) p.catch(()=>{}); SND.silent=a; }
   return SND.ctx; }catch(e){ return null; } }
 function sfx(k,vol=1,at=0){ if(!SND.on) return; const c=ac(); if(!c||!SND.bufs[k]) return; const s=c.createBufferSource(); s.buffer=SND.bufs[k]; const g=c.createGain(); g.gain.value=vol; s.connect(g); g.connect(SND.master); s.start(c.currentTime+at); }
 function loopStart(k,vol=1,fade=1.5){ if(!SND.on) return; const c=ac(); if(!c||!SND.bufs[k]||SND.loops[k]) return; const s=c.createBufferSource(); s.buffer=SND.bufs[k]; s.loop=true; const g=c.createGain(); g.gain.setValueAtTime(0,c.currentTime); g.gain.linearRampToValueAtTime(vol,c.currentTime+fade); s.connect(g); g.connect(SND.master); s.start(); SND.loops[k]={s,g}; }
