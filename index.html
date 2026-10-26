@@ -422,7 +422,6 @@ $('#pushBtn').addEventListener('click',openDoors);
 $('#skipBtn').addEventListener('click',()=>{ enterSanctum(); setTimeout(()=>show('offer'),900); });
 
 /* ---------- 3 · sanctum ---------- */
-function ringBells(){ [0,1].forEach(i=>setTimeout(()=>bell(.8,i?610:520,5),i*700)); }
 $('#toOffer').addEventListener('click',()=>{ show('offer'); });
 
 /* ---------- 4 · offering ---------- */
