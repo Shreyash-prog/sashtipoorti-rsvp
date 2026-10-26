@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Sashtipoorti RSVP</title>
 <meta name="description" content="Enter the Yellammana Gudda temple, take darshan of Shree Renuka Yellamma Devi, and let the Kalal family know if you can join the Sashtipoorti ceremony on 18 November 2026.">
@@ -199,8 +202,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 
   <!-- 1 · WALK (one continuous first-person take) -->
   <section id="gate" class="scene on" aria-label="Walk into the temple">
-    <div class="plate"><img class="lq" src="img/walk1_lq.jpg" alt="">
-      <video id="journey" class="hi" playsinline muted preload="auto" poster="img/walk1.jpg" aria-label="One continuous walk: up the road to the gopura, across the courtyard, under the low door, through the pillared hall taking the aarti, and through the inner door to the Devi"><source src="vid/journey.mp4" type="video/mp4"></video>
+    <div class="plate"><img class="lq" src="img/walk1_lq.jpg?v=2f8130889c" alt="">
+      <video id="journey" class="hi" playsinline muted preload="auto" poster="img/walk1.jpg?v=b6701f8bd5" aria-label="One continuous walk: up the road to the gopura, across the courtyard, under the low door, through the pillared hall taking the aarti, and through the inner door to the Devi"><source src="vid/journey.mp4?v=116e7685cc" type="video/mp4"></video>
     </div>
     <div class="gate-sign"><div class="k">ಶ್ರೀ ರೇಣುಕಾ ಯಲ್ಲಮ್ಮ ದೇವಸ್ಥಾನ · Yellammana Gudda, Saundatti</div></div>
     <button class="hint" id="pushBtn" aria-label="Enter the temple">
@@ -214,10 +217,10 @@ button{font:inherit;color:inherit;cursor:pointer}
 
   <!-- 3 · GARBHAGRIHA (persistent backdrop) -->
   <div id="garbha" aria-hidden="true">
-    <div class="plate"><img class="lq" src="img/darshan_lq.jpg" alt=""><video id="darVid" class="hi" playsinline muted loop preload="auto" poster="img/darshan.jpg"><source src="vid/darshan_loop.mp4" type="video/mp4"></video></div>
-    <div class="aarti-plate plate"><img class="still" src="img/aarti.jpg" alt=""><video id="aartiVid" class="hi" playsinline muted preload="auto" poster="img/aarti.jpg"><source src="vid/aarti.mp4" type="video/mp4"></video></div>
-    <div class="ritual-plate plate" id="flowerPlate"><video id="flowerVid" class="hi" playsinline muted preload="auto" poster="img/darshan.jpg"><source src="vid/flowers.mp4" type="video/mp4"></video></div>
-    <div class="ritual-plate plate" id="sunPlate"><video id="sunVid" class="hi" playsinline muted preload="auto" poster="img/darshan.jpg"><source src="vid/sunray.mp4" type="video/mp4"></video></div>
+    <div class="plate"><img class="lq" src="img/darshan_lq.jpg?v=9413de64dd" alt=""><video id="darVid" class="hi" playsinline muted loop preload="auto" poster="img/darshan.jpg?v=33acd3a3cd"><source src="vid/darshan_loop.mp4?v=322613eccb" type="video/mp4"></video></div>
+    <div class="aarti-plate plate"><img class="still" src="img/aarti.jpg?v=28233bb5e6" alt=""><video id="aartiVid" class="hi" playsinline muted preload="auto" poster="img/aarti.jpg?v=28233bb5e6"><source src="vid/aarti.mp4?v=4cc7cff821" type="video/mp4"></video></div>
+    <div class="ritual-plate plate" id="flowerPlate"><video id="flowerVid" class="hi" playsinline muted preload="auto" poster="img/darshan.jpg?v=33acd3a3cd"><source src="vid/flowers.mp4?v=ce0cf2e02d" type="video/mp4"></video></div>
+    <div class="ritual-plate plate" id="sunPlate"><video id="sunVid" class="hi" playsinline muted preload="auto" poster="img/darshan.jpg?v=33acd3a3cd"><source src="vid/sunray.mp4?v=d3924d9567" type="video/mp4"></video></div>
   </div>
 
   <!-- 3 · SANCTUM text -->
@@ -348,6 +351,7 @@ const CONFIG = {
 };
 /* =============================================================== */
 
+try{ ['rsvp_ref','rsvp_last','rsvp_sound','rsvp_demo'].forEach(k=>localStorage.removeItem(k)); }catch(e){}
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const scenes=$$('.scene'); let current='gate';
 const GARBHA=new Set(['sanctum','offer','thali','ritual','done']), DIM=new Set(['offer','thali','done']), OUTDOOR=new Set(['gate']), WALK=new Set([]);
@@ -357,9 +361,8 @@ function show(id){ scenes.forEach(s=>s.classList.toggle('on',s.id===id)); curren
   AMB.scene(id); }
 
 /* ---------- sound engine: real recordings, Web Audio, OFF by default ---------- */
-const AUD={outdoor:'aud/outdoor.mp3',sanctum:'aud/sanctum.mp3',bell:'aud/bell.mp3',conch:'aud/conch.mp3',aarti:'aud/aarti.mp3',steps:'aud/footsteps.mp3'};
+const AUD={bed:'aud/bed.mp3?v=608c535207',bell:'aud/bell.mp3?v=a62018ac76',aarti:'aud/aarti.mp3?v=e8fea08085'}; // soft devotional bed (flute + tanpura), gentle bell, hushed ghanti
 const SND={ctx:null,on:false,master:null,raw:{},bufs:{},loops:{},silent:null};
-try{ SND.on = localStorage.getItem('rsvp_sound')==='on'; }catch(e){}
 // fetch the recordings early (no gesture needed); decode once an AudioContext exists
 Object.entries(AUD).forEach(([k,u])=>{ fetch(u).then(r=>r.arrayBuffer()).then(ab=>{ SND.raw[k]=ab; if(SND.ctx) decode(k); }).catch(()=>{}); });
 function decode(k){ if(!SND.ctx||SND.bufs[k]||!SND.raw[k]) return; const ab=SND.raw[k].slice(0); const p=SND.ctx.decodeAudioData(ab,b=>{ SND.bufs[k]=b; },()=>{}); if(p&&p.then) p.then(b=>{ SND.bufs[k]=b; }).catch(()=>{}); }
@@ -373,30 +376,28 @@ function sfx(k,vol=1,at=0){ if(!SND.on) return; const c=ac(); if(!c||!SND.bufs[k
 function loopStart(k,vol=1,fade=1.5){ if(!SND.on) return; const c=ac(); if(!c||!SND.bufs[k]||SND.loops[k]) return; const s=c.createBufferSource(); s.buffer=SND.bufs[k]; s.loop=true; const g=c.createGain(); g.gain.setValueAtTime(0,c.currentTime); g.gain.linearRampToValueAtTime(vol,c.currentTime+fade); s.connect(g); g.connect(SND.master); s.start(); SND.loops[k]={s,g}; }
 function loopStop(k,fade=1.2){ const L=SND.loops[k]; if(!L) return; delete SND.loops[k]; const c=SND.ctx; try{ L.g.gain.setTargetAtTime(0,c.currentTime,fade/3); L.s.stop(c.currentTime+fade+.1); }catch(e){} }
 function loopLevel(k,vol,t=1.2){ const L=SND.loops[k]; if(L) L.g.gain.setTargetAtTime(vol,SND.ctx.currentTime,t/3); }
-function setSound(on){ SND.on=on; try{localStorage.setItem('rsvp_sound',on?'on':'off')}catch(e){}
+function setSound(on){ SND.on=on;
   const b=$('#snd'); b.setAttribute('aria-pressed',on); b.setAttribute('aria-label',on?'Sound on':'Sound off'); b.querySelector('span').textContent=on?'Sound on':'Sound off'; b.querySelector('.w1').style.opacity=on?1:.25; b.querySelector('.w2').style.opacity=on?1:.25;
-  if(on){ const c=ac(); if(c) SND.master.gain.setTargetAtTime(1,c.currentTime,.05); setTimeout(()=>{ AMB.scene(current); bell(.7); },150); }
+  if(on){ const c=ac(); if(c) SND.master.gain.setTargetAtTime(1,c.currentTime,.05); setTimeout(()=>{ AMB.scene(current); bell(.6); },150); }
   else { if(SND.ctx) SND.master.gain.setTargetAtTime(0,SND.ctx.currentTime,.05); Object.keys(SND.loops).forEach(k=>loopStop(k,.3)); } }
 $('#snd').addEventListener('click',()=>{ setSound(!SND.on); });
 setSound(SND.on);
 // named cues used by the scenes (vol, and for compatibility the old signature bell(vol,f0,dur) is accepted)
-function bell(vol=1){ sfx('bell',Math.min(1,vol)); }
-function ghanti(){ sfx('aarti',.6); }
-function ping(){ sfx('bell',.18); }
-function shankha(){ sfx('conch',.9); }
-function ghantiStart(ms=6500){ if(!SND.on) return; loopStart('aarti',.8,.3); setTimeout(()=>loopStop('aarti',1.2),ms); }
+function bell(vol=1){ sfx('bell',Math.min(.45,vol*.45)); }
+function ghanti(){ sfx('aarti',.3); }
+function ping(){ sfx('bell',.08); }
+function shankha(){ /* conch retired: too harsh for a soothing mix */ }
+function ghantiStart(ms=6500){ if(!SND.on) return; loopStart('aarti',.35,.8); loopLevel('bed',.45,.8); setTimeout(()=>{ loopStop('aarti',1.5); loopLevel('bed',.7,1.5); },ms); }
 function droneStart(){ AMB.scene('sanctum'); }
-function droneStop(){ loopLevel('sanctum',.35,2); }
-function ringBells(){ [0,1].forEach(i=>setTimeout(()=>bell(.8),i*900)); }
+function droneStop(){ loopLevel('bed',.6,2); }
+function ringBells(){ bell(.8); }
 
-/* ---------- ambience per scene (real beds) ---------- */
+/* ---------- ambience: one soft devotional bed throughout ---------- */
 const AMB={
   scene(id){ if(!SND.on||!SND.ctx) return;
-    const stage=WALKSTAGE; const walking=(id==='gate'&&stage>=0&&stage<4), outdoor=(id==='gate'&&stage>=0&&stage<2), inside=(id==='gate'&&stage>=2&&stage<4)||GARBHA.has(id);
-    if(outdoor) loopStart('outdoor',.9,2); else loopStop('outdoor',2);
-    if(inside) loopStart('sanctum',.8,2); else loopStop('sanctum',2);
-    if(walking) loopStart('steps',.7,.5); else loopStop('steps',.8);
-    if(GARBHA.has(id)&&id!=='sanctum'&&id!=='ritual') loopLevel('sanctum',.5); else if(GARBHA.has(id)) loopLevel('sanctum',.8); }
+    loopStart('bed',.55,3);
+    const lvl = id==='sanctum'||id==='ritual' ? .7 : GARBHA.has(id) ? .5 : .55;
+    loopLevel('bed',lvl,2); }
 };
 
 /* ---------- 1 · gate ---------- */
@@ -407,8 +408,8 @@ function play(v,at=0){ try{ v.currentTime=at; const p=v.play(); if(p&&p.catch) p
 let RIT=null; // the clip currently playing a ritual — never reset by warm()
 function warm(v){ if(v===RIT) return; try{ v.load(); v.muted=true; const p=v.play(); if(p&&p.then) p.then(()=>{ if(v===RIT) return; v.pause(); v.currentTime=0; }).catch(()=>{}); }catch(e){} }
 function openDoors(){ if(opened) return; opened=true; if(SND.on) ac(); $('#gate').classList.add('open'); $('#skipBtn').hidden=false; $('#walkCap').hidden=false; WALKSTAGE=0; $('#capK').textContent=CUES[0][1]; $('#capS').textContent=CUES[0][2]; AMB.scene('gate');
-  [V.dar].forEach(warm); setTimeout(shankha,600); play(V.j);
-  V.j.ontimeupdate=()=>{ const t=V.j.currentTime; let i=0; for(let k=0;k<CUES.length;k++) if(t>=CUES[k][0]) i=k; if(i!==WALKSTAGE){ WALKSTAGE=i; AMB.scene('gate'); $('#capK').textContent=CUES[i][1]; $('#capS').textContent=CUES[i][2]; if(i===1) setTimeout(()=>bell(.6),2500); if(i===2) setTimeout(()=>ghantiStart(3500),3000); if(i===3) setTimeout(()=>bell(.9),1800); } };
+  [V.dar].forEach(warm); setTimeout(()=>bell(.5),400); play(V.j);
+  V.j.ontimeupdate=()=>{ const t=V.j.currentTime; let i=0; for(let k=0;k<CUES.length;k++) if(t>=CUES[k][0]) i=k; if(i!==WALKSTAGE){ WALKSTAGE=i; AMB.scene('gate'); $('#capK').textContent=CUES[i][1]; $('#capS').textContent=CUES[i][2]; if(i===1) setTimeout(()=>bell(.6),2500); if(i===3) setTimeout(()=>bell(.8),1800); } };
   V.j.onended=enterSanctum; }
 function enterSanctum(){ if(WALKSTAGE===4) return; WALKSTAGE=4; const g=$('#gate'); g.classList.add('hold'); $('#skipBtn').hidden=true; $('#walkCap').hidden=true;
   // start the sanctum loop first; release the held last frame only once the loop has painted
@@ -426,8 +427,7 @@ $('#toOffer').addEventListener('click',()=>{ show('offer'); });
 
 /* ---------- 4 · offering ---------- */
 const state={response:null,count:0,name:'',phone:'',message:'',ref:null};
-try{ state.ref=localStorage.getItem('rsvp_ref'); }catch(e){}
-if(!state.ref){ state.ref='r'+Math.random().toString(36).slice(2,8)+Date.now().toString(36).slice(-4); try{localStorage.setItem('rsvp_ref',state.ref)}catch(e){} }
+state.ref='r'+Math.random().toString(36).slice(2,8)+Date.now().toString(36).slice(-4); // new reference every visit — nothing is stored on the device
 const LABELS={yes:['Perform Aarti','Yes — we will be there'],maybe:['Offer a Flower','Maybe — we hope to come'],no:['Take Blessings','No — we cannot attend']};
 $$('.opt').forEach(b=>b.addEventListener('click',()=>{ state.response=b.dataset.r; ping(); const no=state.response==='no';
   $('#numRow').style.display=no?'none':''; $('#thaliTitle').textContent= no?'Leave your name for the family':'How many of you will come?';
@@ -446,7 +446,6 @@ async function finishSubmit(){ const b=$('#submitBtn'); b.disabled=true; await s
 
 /* ---------- submit ---------- */
 function submit(s){ const rec={time:new Date().toISOString(),name:s.name,phone:s.phone,response:s.response,count:s.response==='no'?0:s.count,message:s.message,ref:s.ref};
-  try{ localStorage.setItem('rsvp_last',JSON.stringify(rec)); }catch(e){}
   if(!CONFIG.formId){ try{ const all=JSON.parse(localStorage.getItem('rsvp_demo')||'[]'); all.push(rec); localStorage.setItem('rsvp_demo',JSON.stringify(all)); }catch(e){} return Promise.resolve(); }
   return new Promise(res=>{ const f=document.createElement('form'); f.method='POST'; f.target='gform_sink'; f.action=`https://docs.google.com/forms/d/e/${CONFIG.formId}/formResponse`; f.style.display='none';
     const E=CONFIG.entries; const map={[E.name]:rec.name,[E.phone]:rec.phone,[E.response]:rec.response,[E.count]:String(rec.count),[E.message]:rec.message,[E.ref]:rec.ref};
@@ -456,9 +455,9 @@ function submit(s){ const rec={time:new Date().toISOString(),name:s.name,phone:s
 /* ---------- 6 · ritual ---------- */
 function runRitual(){ const r=$('#ritual'); r.classList.remove('yes','maybe','no'); r.classList.add(state.response);
   const K=$('#ritK'),S=$('#ritS'); let dur,cls,vid,onstart; const g=$('#garbha'); g.classList.remove('aarti','flowers','sun');
-  if(state.response==='yes'){ K.textContent='Your aarti is offered'; S.textContent='Udho Udho! We will see you on 18 November.'; dur=7200; cls='aarti'; vid=V.aarti; onstart=()=>{ try{V.dar.pause();}catch(e){} setTimeout(()=>{ bell(.8); ghantiStart(6200); },200); }; }
+  if(state.response==='yes'){ K.textContent='Your aarti is offered'; S.textContent='Udho Udho! We will see you on 18 November.'; dur=7200; cls='aarti'; vid=V.aarti; onstart=()=>{ try{V.dar.pause();}catch(e){} setTimeout(()=>{ bell(.7); ghantiStart(6000); },200); }; }
   else if(state.response==='maybe'){ K.textContent='Your flowers are offered'; S.textContent='May Devi make the way easy for you to join us.'; dur=7000; cls='flowers'; vid=V.flower; onstart=()=>{ try{V.dar.pause();}catch(e){} setTimeout(()=>bell(.9),400); }; }
-  else { K.textContent='Her blessings reach you'; S.textContent='Thank you — your wishes reach us and our parents.'; dur=7000; cls='sun'; vid=V.sun; onstart=()=>{ try{V.dar.pause();}catch(e){} setTimeout(()=>bell(.9),300); setTimeout(shankha,1800); }; }
+  else { K.textContent='Her blessings reach you'; S.textContent='Thank you — your wishes reach us and our parents.'; dur=7000; cls='sun'; vid=V.sun; onstart=()=>{ try{V.dar.pause();}catch(e){} setTimeout(()=>bell(.8),300); }; }
   RIT=vid; show('ritual');
   // Reveal the clip only once it is really painting frames; if the network is too slow, fall back to the real still (poster) instead of a black plate.
   let started=false; const start=(live)=>{ if(started) return; started=true; vid.classList.toggle('off',!live); g.classList.add(cls); onstart(); setTimeout(showDone,dur); };
@@ -478,13 +477,13 @@ $('#again').addEventListener('click',()=>{ state.count=0; show('offer'); play(V.
 function esc(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
 /* ---------- returning guest ---------- */
-(function(){ try{ const last=JSON.parse(localStorage.getItem('rsvp_last')||'null'); if(last&&location.hash!=='#admin'){ Object.assign(state,{response:last.response,count:last.count,name:last.name,phone:last.phone,message:last.message}); $('#nm').value=last.name||''; $('#ph').value=last.phone||''; $('#msg').value=last.message||''; $('#guestN').value=last.count||''; } }catch(e){} })();
+// (no resume of a previous response: every open starts fresh)
 
 /* ---------- admin ---------- */
 function isAdminHash(){ return location.hash.replace('#','').toLowerCase()==='admin'; }
-function enterAdmin(){ show('admin'); $('#adminGate').hidden=sessionStorage.getItem('rsvp_admin')==='1'; $('#adminBody').hidden=!$('#adminGate').hidden; if(!$('#adminBody').hidden) loadAdmin(); }
+function enterAdmin(){ show('admin'); $('#adminGate').hidden=false; $('#adminBody').hidden=!$('#adminGate').hidden; if(!$('#adminBody').hidden) loadAdmin(); }
 $('#codeBtn').addEventListener('click',tryCode); $('#code').addEventListener('keydown',e=>{ if(e.key==='Enter') tryCode(); });
-function tryCode(){ if($('#code').value.trim()===CONFIG.adminCode){ sessionStorage.setItem('rsvp_admin','1'); $('#adminGate').hidden=true; $('#adminBody').hidden=false; loadAdmin(); } else { $('#codeErr').textContent='That code did not match.'; } }
+function tryCode(){ if($('#code').value.trim()===CONFIG.adminCode){ $('#adminGate').hidden=true; $('#adminBody').hidden=false; loadAdmin(); } else { $('#codeErr').textContent='That code did not match.'; } }
 $('#exitAdmin').addEventListener('click',()=>{ history.replaceState(null,'',location.pathname+location.search); show('gate'); });
 $('#refresh').addEventListener('click',loadAdmin);
 let adminRows=[];
@@ -492,8 +491,9 @@ async function loadAdmin(){ const n=$('#adminNotice'); let rows=[];
   if(CONFIG.sheetCsvUrl){ try{ const r=await fetch(CONFIG.sheetCsvUrl+(CONFIG.sheetCsvUrl.includes('?')?'&':'?')+'_='+Date.now(),{cache:'no-store'}); if(!r.ok) throw new Error(r.status); rows=parseCsv(await r.text()); n.hidden=true; }
     catch(e){ n.hidden=false; n.innerHTML='<b>Could not load the response sheet.</b> Check that the Google Sheet is published to the web as CSV and that <code>sheetCsvUrl</code> in the page config points to it. Showing responses saved on this device only.'; rows=demoRows(); } }
   else { n.hidden=false; n.innerHTML='<b>Demo mode.</b> Responses are stored only on each guest\'s own device until a Google Form is connected (set <code>formId</code>, <code>entries</code> and <code>sheetCsvUrl</code> in the page config). Showing responses from this device.'; rows=demoRows(); }
-  const byRef=new Map(); rows.forEach(r=>{ const k=r.ref||(r.name+'|'+r.phone); byRef.set(k,r); }); // latest wins
-  adminRows=[...byRef.values()].sort((a,b)=>String(b.time).localeCompare(String(a.time)));
+  rows.sort((a,b)=>String(a.time).localeCompare(String(b.time))); const byRef=new Map(); rows.forEach(r=>{ byRef.set(r.ref||(r.name+'|'+r.phone),r); }); // latest per visit wins
+  const byPerson=new Map(); [...byRef.values()].forEach(r=>{ const k=String(r.name||'').trim().toLowerCase().replace(/\s+/g,' ')+'|'+String(r.phone||'').replace(/\D/g,''); byPerson.set(k,r); }); // same name + phone across visits → latest wins
+  adminRows=[...byPerson.values()].sort((a,b)=>String(b.time).localeCompare(String(a.time)));
   const c={yes:0,maybe:0,no:0}; let heads=0,headsM=0; adminRows.forEach(r=>{ const k=(r.response||'').toLowerCase(); if(c[k]!==undefined) c[k]++; const g=parseInt(r.count)||0; if(k==='yes') heads+=g; if(k==='maybe') headsM+=g; });
   $('#nYes').textContent=c.yes; $('#nMaybe').textContent=c.maybe; $('#nNo').textContent=c.no; $('#nHeads').textContent=heads; $('#nHeadsMaybe').textContent='+'+headsM;
   $('#list').innerHTML= adminRows.length? adminRows.map(r=>{ const k=(r.response||'').toLowerCase(); return `<div class="resp"><div class="top"><span class="nm">${esc(r.name||'—')}</span><span class="tag ${k}">${esc(k||'?')}${k!=='no'&&r.count?` · ${esc(r.count)}`:''}</span></div><div class="meta">${esc(fmtTime(r.time))}${r.phone?' · '+esc(r.phone):''}</div>${r.message?`<div class="q">"${esc(r.message)}"</div>`:''}</div>`; }).join('') : '<div class="resp" style="text-align:center;color:var(--ink-dim)">No responses yet.</div>'; }
